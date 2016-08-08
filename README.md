@@ -26,7 +26,7 @@ WeightedGCCA methods
 * `learn`: entrypoint for learning WeightedGCCA model from training set
 * `apply`: entrypoint for extracting embeddings from new data
 
-The input views used in "Learning Multiview Embeddings of Twitter Users" can be found at [http://www.cs.jhu.edu/~mdredze/datasets/multiview_embeddings/] -- in the same format as `resources/sample_wgcca_input.tsv`.
+The input views used in "Learning Multiview Embeddings of Twitter Users" can be found at http://www.cs.jhu.edu/~mdredze/datasets/multiview_embeddings/ -- in the same format as `resources/sample_wgcca_input.tsv`.
 
 Please contact *adrian dot author1_surname at gmail dot com* if you have any
 questions/suggestions/concerns/comments.
