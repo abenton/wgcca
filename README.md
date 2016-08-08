@@ -6,7 +6,7 @@ Test suite:
 
     python src/wgccaTest.py
 
-Sample call (learn 5-dimensional WGCCA embeddings, weighting first two views twice as much as second two):
+Sample call to learn 5-dimensional WGCCA model (first two views weighted twice as much as second two):
 
     python src/wgcca.py --input resources/sample_wgcca_input.tsv.gz --output wgcca_embeddings.npz --model wgcca_model.pickle --k 5 --kept_views 0 1 2 3 --weights 1.0 1.0 0.5 0.5 --reg 1.e-8 1.e-8 1.e-8 1.e-8    python src/wgcca.py
 
@@ -16,9 +16,9 @@ Sample call (learn 5-dimensional WGCCA embeddings, weighting first two views twi
 
 WeightedGCCA methods
 ----
-* *_compute*: look at this if you want to know how embeddings are computed
-* *learn*: entrypoint for learning WeightedGCCA model from training set
-* *apply*: entrypoint for extracting embeddings from new data
+* `_compute`: look at this if you want to know how embeddings are computed
+* `learn`: entrypoint for learning WeightedGCCA model from training set
+* `apply`: entrypoint for extracting embeddings from new data
 
 Please contact *adrian dot author1_surname at gmail dot com* if you have any
 questions/suggestions/concerns/comments.
