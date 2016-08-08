@@ -2,6 +2,12 @@
 Python Implementation of Weighted Generalized Canonical Correlation Analysis as described in 
 "Learning Multiview Embeddings of Twitter Users". Benton A, Arora R, and Dredze M. ACL 2016.
 
+Tested with
+
++ Python 2.7
++ scipy 0.17.0
++ numpy 1.10.4
+
 Test suite:
 
     python src/wgccaTest.py
