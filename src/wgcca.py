@@ -19,6 +19,7 @@ import cPickle, gzip, os, sys, time
 
 import numpy as np
 import scipy
+import scipy.sparse
 import scipy.linalg
 
 import argparse
@@ -161,7 +162,7 @@ class WeightedGCCA:
     
     N = views[0].shape[0]
     
-    if not K:
+    if K is None:
       K = np.ones((N, self.V)) # Assume we have data for all views/examples
     
     for U, v in zip(Us, views):
@@ -362,7 +363,7 @@ if __name__ == '__main__':
                       help='path where to save embeddings for each example')
   parser.add_argument('--model', default=None,
                       help='path where to save pickled WGCCA model')
-  parser.add_argument('--k', default=None, help='dimensionality of embeddings')
+  parser.add_argument('--k', default=None, type=int, help='dimensionality of embeddings')
   parser.add_argument('--kept_views', default=None,
                       type=int, nargs='+',
                       help='indices of views to learn model over.  Defaults to using all views.')
