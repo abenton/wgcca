@@ -28,5 +28,9 @@ WeightedGCCA methods
 
 The input views used in "Learning Multiview Embeddings of Twitter Users" can be found at http://www.cs.jhu.edu/~mdredze/datasets/multiview_embeddings/ -- in the same format as `resources/sample_wgcca_input.tsv`.
 
+If you use this code please cite:
+
+Adrian Benton, Raman Arora, and Mark Dredze. Learning Multiview Representations of Twitter Users. Association for Computational Linguistics (ACL), 2016.
+
 Please contact *adrian dot author1_surname at gmail dot com* if you have any
 questions/suggestions/concerns/comments.
