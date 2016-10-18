@@ -71,7 +71,7 @@ class TestWeightedGCCA(unittest.TestCase):
   
   def test_recoverG(self):
     '''
-    Test GCCA implementation by seeing if it can recover an orthogonal latent G.
+    Test GCCA implementation by seeing if it can recover G.
     '''
     
     eps = 1.e-10
@@ -85,14 +85,13 @@ class TestWeightedGCCA(unittest.TestCase):
     U2 = wgcca.U[1]
     U3 = wgcca.U[2]
     
-    Gprime   = wgcca.apply(Vs, K=None, scaleBySv=False)
-    GprimeSv = wgcca.apply(Vs, K=None, scaleBySv=True)
+    Gprime   = wgcca.G
     
     # Rotate G to minimize norm of difference between G and G'
     R, B = scipy.linalg.orthogonal_procrustes(self.G, Gprime)
     normDiff = scipy.linalg.norm(self.G.dot(R) - Gprime)
     
-    print 'Recovered G up to rotation; difference in norm:', normDiff
+    print ('Recovered G up to rotation; difference in norm:', normDiff)
     
     self.assertTrue( normDiff < 1.e-6 )
     self.assertTrue( np.allclose(self.G.dot(R), Gprime) )
