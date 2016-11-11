@@ -400,7 +400,7 @@ def main(inPath, outPath, modelPath, k, keptViews=None, weights=None, regs=None,
       wgcca.G_scaled = None
     
     modelFile = fopen(modelPath, 'wb')
-    cPickle.dump(wgcca, modelFile)
+    pickle.dump(wgcca, modelFile)
     modelFile.close()
   
   # Save training set embeddings
