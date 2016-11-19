@@ -280,7 +280,6 @@ def ldViews(inPath, viewsToKeep, replaceEmpty=True, maxRows=-1):
   # Use all views
   if not viewsToKeep:
     viewsToKeep = [i for i in range(numViews)]
-  vToKSet = set(viewsToKeep)
   
   for fld in flds[1+V:]:
     FperV.append(len(fld.split()))
@@ -317,8 +316,10 @@ def ldViews(inPath, viewsToKeep, replaceEmpty=True, maxRows=-1):
     viewStrs = flds[(1+V):]
     
     for idx, viewStr in enumerate(viewStrs):
-      if idx not in vToKSet:
+      if idx not in viewsToKeep:
         continue
+      
+      idx = viewsToKeep.index(idx)
       
       for fidx, v in enumerate(viewStr.split()):
         data[idx][lnidx,fidx] = float(v)
@@ -406,6 +407,9 @@ def main(inPath, outPath, modelPath, k, keptViews=None, weights=None, regs=None,
     modelFile = fopen(modelPath, 'wb')
     pickle.dump(wgcca, modelFile)
     modelFile.close()
+  
+  print (views[0])
+  print (views[1])
   
   # Save training set embeddings
   if outPath:
