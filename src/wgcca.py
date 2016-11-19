@@ -407,8 +407,6 @@ def main(inPath, outPath, modelPath, k, keptViews=None, weights=None, regs=None,
     pickle.dump(wgcca, modelFile)
     modelFile.close()
   
-  import pdb; pdb.set_trace()
-  
   # Save training set embeddings
   if outPath:
     G = wgcca.apply(views, K, scaleBySv)
