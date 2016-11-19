@@ -280,6 +280,7 @@ def ldViews(inPath, viewsToKeep, replaceEmpty=True, maxRows=-1):
   # Use all views
   if not viewsToKeep:
     viewsToKeep = [i for i in range(numViews)]
+  vToKSet = set(viewsToKeep)
   
   for fld in flds[1+V:]:
     FperV.append(len(fld.split()))
@@ -291,6 +292,9 @@ def ldViews(inPath, viewsToKeep, replaceEmpty=True, maxRows=-1):
   
   F  = [len(fld.split()) for fld in flds[(1+V):]]
   N += 1
+  
+  # Only reduce to kept views
+  F = [F[v] for v in viewsToKeep]
   
   for ln in f:
     N += 1
@@ -313,9 +317,9 @@ def ldViews(inPath, viewsToKeep, replaceEmpty=True, maxRows=-1):
     viewStrs = flds[(1+V):]
     
     for idx, viewStr in enumerate(viewStrs):
-      for v in viewStr.split():
-        data[idx:]
-      vals = [float(v) for v in viewStr.split()]
+      if idx not in vToKSet:
+        continue
+      
       for fidx, v in enumerate(viewStr.split()):
         data[idx][lnidx,fidx] = float(v)
   
@@ -325,9 +329,9 @@ def ldViews(inPath, viewsToKeep, replaceEmpty=True, maxRows=-1):
   if replaceEmpty:
     means = [np.sum(d, axis=0)/np.sum(1. * (np.abs(d).sum(axis=1) > 0.0)) for d in data]
     for i in range(N):
-      for vIdx in viewsToKeep:
-        if sum([np.sum(data[vIdx][i,:]) for vIdx in viewsToKeep]) == 0.:
-          data[vIdx][i,:] = means[vIdx]
+      for nvIdx, vIdx in enumerate(viewsToKeep):
+        if np.sum(data[nvIdx][i,:]) == 0.:
+          data[nvIdx][i,:] = means[nvIdx]
   
   return ids, data
 
@@ -400,8 +404,10 @@ def main(inPath, outPath, modelPath, k, keptViews=None, weights=None, regs=None,
       wgcca.G_scaled = None
     
     modelFile = fopen(modelPath, 'wb')
-    cPickle.dump(wgcca, modelFile)
+    pickle.dump(wgcca, modelFile)
     modelFile.close()
+  
+  import pdb; pdb.set_trace()
   
   # Save training set embeddings
   if outPath:
