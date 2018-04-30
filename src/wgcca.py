@@ -408,9 +408,6 @@ def main(inPath, outPath, modelPath, k, keptViews=None, weights=None, regs=None,
     pickle.dump(wgcca, modelFile)
     modelFile.close()
   
-  print (views[0])
-  print (views[1])
-  
   # Save training set embeddings
   if outPath:
     G = wgcca.apply(views, K, scaleBySv)
